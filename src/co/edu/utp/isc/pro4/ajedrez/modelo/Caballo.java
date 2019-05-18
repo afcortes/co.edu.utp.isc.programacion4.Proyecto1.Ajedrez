@@ -17,12 +17,18 @@ public class Caballo extends Ficha {
 
     @Override
     public boolean mover(String Inicial,String movimiento) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        if((Math.abs(Inicial.charAt(0)-movimiento.charAt(0))==2)&&(Math.abs(Integer.valueOf(Inicial.substring(1))-Integer.valueOf(movimiento.substring(1)))==1)){
+            return true;
+        }
+        else if((Math.abs(Inicial.charAt(0)-movimiento.charAt(0))==1)&&(Math.abs(Integer.valueOf(Inicial.substring(1))-Integer.valueOf(movimiento.substring(1)))==2)){
+            return true;
+        }
+        return false;
     }
 
     @Override
     public boolean comer(String Inicial,String movimiento) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.mover(Inicial, movimiento);
     }
 
 }
