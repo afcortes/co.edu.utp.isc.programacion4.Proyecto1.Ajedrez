@@ -37,6 +37,8 @@ public class Ajedrez {
     public void jugar() {
         jugadores[0].setAjedrez(this);
         jugadores[1].setAjedrez(this);
+        jugadores[0].setRey();
+        jugadores[1].setRey();
 
         ubicarFichasTablero();
         mostrarTablero();
