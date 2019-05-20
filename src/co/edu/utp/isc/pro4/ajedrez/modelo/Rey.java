@@ -28,62 +28,66 @@ public class Rey extends Ficha {
                 return true;
             }  
         }
-        else if(this.getColor()==Color.BLANCO){
-            if(movimiento.equalsIgnoreCase("G1")){
-                for(int i = this.getCasilla().getColumna()+1;i<='G';i++){
-                    if((this.getAjedrez().getTablero().getCasilla(1,((char)(i))).isOcupada())||(this.getAjedrez().getTablero().isAmenazada(this.getColor(), this.getAjedrez().getTablero().getCasilla(1,((char)(i)))))){
-                        return false;
+        if(!this.getAjedrez().getTablero().isAmenazada(this.getColor(),this.getCasilla())){
+            if(this.getColor()==Color.BLANCO){
+                if(movimiento.equalsIgnoreCase("G1")){
+                    for(int i = this.getCasilla().getColumna()+1;i<='G';i++){
+                        if((this.getAjedrez().getTablero().getCasilla(1,((char)(i))).isOcupada())||(this.getAjedrez().getTablero().isAmenazada(this.getColor(), this.getAjedrez().getTablero().getCasilla(1,((char)(i)))))){
+                            return false;
+                        }
                     }
+                    if(this.getAjedrez().getTablero().getCasilla("H1").getFicha() instanceof Torre ){
+                        if(!this.isPrimerMovimiento()&&!this.getAjedrez().getTablero().getCasilla("H1").getFicha().isPrimerMovimiento()){
+                            this.enroque("H1","F1");
+                            return true;
+                        }
+                    }        
                 }
-                if(this.getAjedrez().getTablero().getCasilla("H1").getFicha() instanceof Torre ){
-                    if(!this.isPrimerMovimiento()&&!this.getAjedrez().getTablero().getCasilla("H1").getFicha().isPrimerMovimiento()){
-                        this.enroque("H1","F1");
-                        return true;
+                else if(movimiento.equalsIgnoreCase("C1")){
+                    for(int i = this.getCasilla().getColumna()-1;i>='C';i--){
+                        if((this.getAjedrez().getTablero().getCasilla(1,((char)(i))).isOcupada())||(this.getAjedrez().getTablero().isAmenazada(this.getColor(), this.getAjedrez().getTablero().getCasilla(1,((char)(i)))))){
+                            return false;
+                        }
                     }
-                }        
-            }
-            else if(movimiento.equalsIgnoreCase("C1")){
-                for(int i = this.getCasilla().getColumna()-1;i>='C';i--){
-                    if((this.getAjedrez().getTablero().getCasilla(1,((char)(i))).isOcupada())||(this.getAjedrez().getTablero().isAmenazada(this.getColor(), this.getAjedrez().getTablero().getCasilla(1,((char)(i)))))){
-                        return false;
-                    }
-                }
-                if(this.getAjedrez().getTablero().getCasilla("A1").getFicha() instanceof Torre ){
-                    if(!this.isPrimerMovimiento()&&!this.getAjedrez().getTablero().getCasilla("A1").getFicha().isPrimerMovimiento()){
-                        this.enroque("A1","D1");
-                        return true;
-                    }
-                } 
+                    if(!this.getAjedrez().getTablero().getCasilla("B1").isOcupada())
+                        if(this.getAjedrez().getTablero().getCasilla("A1").getFicha() instanceof Torre ){
+                            if(!this.isPrimerMovimiento()&&!this.getAjedrez().getTablero().getCasilla("A1").getFicha().isPrimerMovimiento()){
+                                this.enroque("A1","D1");
+                                return true;
+                            }
+                        } 
 
-            }
-        }
-        else if(this.getColor()==Color.NEGRO){
-            if(movimiento.equalsIgnoreCase("G8")){
-                for(int i = this.getCasilla().getColumna()+1;i<='G';i++){
-                    if((this.getAjedrez().getTablero().getCasilla(1,((char)(i))).isOcupada())||(this.getAjedrez().getTablero().isAmenazada(this.getColor(), this.getAjedrez().getTablero().getCasilla(1,((char)(i)))))){
-                        return false;
-                    }
                 }
-                if(this.getAjedrez().getTablero().getCasilla("H8").getFicha() instanceof Torre ){
-                    if(!this.isPrimerMovimiento()&&!this.getAjedrez().getTablero().getCasilla("H8").getFicha().isPrimerMovimiento()){
-                        this.enroque("H8","F8");
-                        return true;
-                    }
-                }        
             }
-            else if(movimiento.equalsIgnoreCase("C8")){
-                for(int i = this.getCasilla().getColumna()-1;i>='C';i--){
-                    if((this.getAjedrez().getTablero().getCasilla(1,((char)(i))).isOcupada())||(this.getAjedrez().getTablero().isAmenazada(this.getColor(), this.getAjedrez().getTablero().getCasilla(1,((char)(i)))))){
-                        return false;
+            else if(this.getColor()==Color.NEGRO){
+                if(movimiento.equalsIgnoreCase("G8")){
+                    for(int i = this.getCasilla().getColumna()+1;i<='G';i++){
+                        if((this.getAjedrez().getTablero().getCasilla(1,((char)(i))).isOcupada())||(this.getAjedrez().getTablero().isAmenazada(this.getColor(), this.getAjedrez().getTablero().getCasilla(1,((char)(i)))))){
+                            return false;
+                        }
                     }
+                    if(this.getAjedrez().getTablero().getCasilla("H8").getFicha() instanceof Torre ){
+                        if(!this.isPrimerMovimiento()&&!this.getAjedrez().getTablero().getCasilla("H8").getFicha().isPrimerMovimiento()){
+                            this.enroque("H8","F8");
+                            return true;
+                        }
+                    }        
                 }
-                if(this.getAjedrez().getTablero().getCasilla("A8").getFicha() instanceof Torre ){
-                    if(!this.isPrimerMovimiento()&&!this.getAjedrez().getTablero().getCasilla("A8").getFicha().isPrimerMovimiento()){
-                        this.enroque("A8","D8");
-                        return true;
+                else if(movimiento.equalsIgnoreCase("C8")){
+                    for(int i = this.getCasilla().getColumna()-1;i>='C';i--){
+                        if((this.getAjedrez().getTablero().getCasilla(1,((char)(i))).isOcupada())||(this.getAjedrez().getTablero().isAmenazada(this.getColor(), this.getAjedrez().getTablero().getCasilla(1,((char)(i)))))){
+                            return false;
+                        }
                     }
-                } 
+                    if(!this.getAjedrez().getTablero().getCasilla("B8").isOcupada())
+                        if(this.getAjedrez().getTablero().getCasilla("A8").getFicha() instanceof Torre ){
+                            if(!this.isPrimerMovimiento()&&!this.getAjedrez().getTablero().getCasilla("A8").getFicha().isPrimerMovimiento()){
+                                this.enroque("A8","D8");
+                                return true;
+                            }
+                        } 
 
+                }
             }
         }
         return false;

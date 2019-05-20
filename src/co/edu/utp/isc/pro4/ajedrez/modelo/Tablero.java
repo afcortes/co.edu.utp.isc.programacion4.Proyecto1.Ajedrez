@@ -362,12 +362,118 @@ public class Tablero {
                 }
             }
         }
-        return false;
-            
-            
+        return false;      
     }
     
+    public boolean validarJaque(Color color, Casilla casilla){
+        return this.isAmenazada(color, casilla);  
+    } 
+    
     private boolean isAlcanzablePorPeon(Color color,Casilla casilla){
+        if((casilla.getFila()<8)&&(color==Color.BLANCO)){
+            if(this.getCasilla(casilla.getFila()+1, casilla.getColumna()).isOcupada()){
+                if((this.getCasilla(casilla.getFila()+1, casilla.getColumna()).getFicha() instanceof Peon)&&(this.getCasilla(casilla.getFila()+1, casilla.getColumna()).getFicha().getColor()!=color)){
+                    return true;
+                }
+                return false;
+            }
+        }
+        if((casilla.getFila()>1)&&(color==Color.NEGRO)){
+            if(this.getCasilla(casilla.getFila()-1, casilla.getColumna()).isOcupada()){
+                if((this.getCasilla(casilla.getFila()-1, casilla.getColumna()).getFicha() instanceof Peon)&&(this.getCasilla(casilla.getFila()-1, casilla.getColumna()).getFicha().getColor()!=color)){
+                    return true;
+                }
+                return false;
+            }
+        }
+        return false;
+    }
+
+    boolean validarJaqueMate(Color color, Casilla rey) {     
+        if(rey.getFila()>1){
+            if(!this.getCasilla(rey.getFila()-1,rey.getColumna()).isOcupada()){
+                if(!this.isAmenazada(color, this.getCasilla(rey.getFila()-1,rey.getColumna()))){
+                    return false;
+                }
+            }
+            else if((this.getCasilla(rey.getFila()-1,rey.getColumna()).isOcupada())&&(this.getCasilla(rey.getFila()-1,rey.getColumna()).getFicha().getColor()!=color)){
+                if(!this.isAmenazada(color, this.getCasilla(rey.getFila()-1,rey.getColumna()))){
+                    Casilla c1 = rey;
+                    Casilla c2 = this.getCasilla(rey.getFila()-1,rey.getColumna());
+                    Ficha f1 = c1.getFicha();
+                    Ficha f2 = c2.getFicha();
+                    c1.setFicha(null);
+                    c2.setFicha(f1);
+                    if(isAmenazada(color, c2)){
+                        c1.setFicha(f1);
+                        c2.setFicha(f2);
+                    }
+                    else{
+                        c1.setFicha(f1);
+                        c2.setFicha(f2);
+                        return false;
+                    }
+                }
+            }
+        }
+        if(rey.getFila()<8){
+            if(!this.getCasilla(rey.getFila()+1,rey.getColumna()).isOcupada()){
+                if(!this.isAmenazada(color, this.getCasilla(rey.getFila()+1,rey.getColumna()))){
+                    return false;
+                }
+            }
+        }
+        if(rey.getColumna()>'A'){
+            if(!this.getCasilla(rey.getFila(),((char)(rey.getColumna()-1))).isOcupada()){
+                if(!this.isAmenazada(color, this.getCasilla(rey.getFila(),((char)(rey.getColumna()-1))))){
+                    return false;
+                }
+            }
+        }
+        if(rey.getColumna()<'H'){
+            if(!this.getCasilla(rey.getFila(),((char)(rey.getColumna()+1))).isOcupada()){
+                if(!this.isAmenazada(color, this.getCasilla(rey.getFila(),((char)(rey.getColumna()+1))))){
+                    return false;
+                }
+            }
+        }
+        if(rey.getFila()>1&&rey.getColumna()>'A'){
+            if(!this.getCasilla(rey.getFila()-1,((char)(rey.getColumna()-1))).isOcupada()){
+                if(!this.isAmenazada(color, this.getCasilla(rey.getFila()-1,((char)(rey.getColumna()-1))))){
+                    return false;
+                }
+            }
+        }
+        if(rey.getFila()>1&&rey.getColumna()<'H'){
+            if(!this.getCasilla(rey.getFila()-1,((char)(rey.getColumna()+1))).isOcupada()){
+                if(!this.isAmenazada(color, this.getCasilla(rey.getFila()-1,((char)(rey.getColumna()+1))))){
+                    return false;
+                }
+            }
+        }
+        if(rey.getFila()<8&&rey.getColumna()>'A'){
+            if(!this.getCasilla(rey.getFila()+1,((char)(rey.getColumna()-1))).isOcupada()){
+                if(!this.isAmenazada(color, this.getCasilla(rey.getFila()+1,((char)(rey.getColumna()-1))))){
+                    return false;
+                }
+            }
+        }
+        if(rey.getFila()<8&&rey.getColumna()<'H'){
+            if(!this.getCasilla(rey.getFila()+1,((char)(rey.getColumna()+1))).isOcupada()){
+                if(!this.isAmenazada(color, this.getCasilla(rey.getFila()+1,((char)(rey.getColumna()+1))))){
+                    return false;
+                }
+            }
+        }
+        
+        return isProtegible(color,rey);
+    }
+
+    private boolean isProtegible(Color color, Casilla rey) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    private boolean resolverJaque(){
         return false;
     }
 }

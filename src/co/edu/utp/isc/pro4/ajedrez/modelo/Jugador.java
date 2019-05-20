@@ -55,16 +55,18 @@ public class Jugador {
                     if(this.ajedrez.getTablero().getCasilla(movimiento[0]).getFicha().comer(movimiento[0],movimiento[1])){
                         Casilla c1 = this.ajedrez.getTablero().getCasilla(movimiento[0]);
                         Casilla c2 = this.ajedrez.getTablero().getCasilla(movimiento[1]);
-                        c2.setFicha(c1.getFicha());
+                        Ficha f1 = c1.getFicha();
+                        Ficha f2 = c2.getFicha();
+                        c2.setFicha(f1);
                         c1.setFicha(null);
-                        if(c2.getFicha() instanceof Rey)
+                        if(f1 instanceof Rey)
                         {
                             this.rey = c2;
                         }
                         if(this.ajedrez.getTablero().isAmenazada(this.color,this.rey)){
-                            c1.setFicha(c2.getFicha());
-                            c2.setFicha(null);
-                            if(c1.getFicha() instanceof Rey)
+                            c1.setFicha(f1);
+                            c2.setFicha(f2);
+                            if(f1 instanceof Rey)
                             {
                                 this.rey = c1;
                             }
@@ -89,11 +91,15 @@ public class Jugador {
 
     private void rendirse() {
         // No me gusta pero los estudiantes lo pidieron
-        ajedrez.rendirse();
+        this.ajedrez.rendirse();
     }
     
     public void setRey(){
         this.rey = this.ajedrez.getTablero().getCasilla(this.color==Color.BLANCO ? "E1" : "E8");
+    }
+    
+    public Casilla getRey(){
+        return this.rey;
     }
     
     public Color getColor(){
