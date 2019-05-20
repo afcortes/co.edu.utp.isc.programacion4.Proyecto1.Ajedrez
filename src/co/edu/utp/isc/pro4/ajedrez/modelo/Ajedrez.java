@@ -4,6 +4,18 @@
  * and open the template in the editor.
  */
 package co.edu.utp.isc.pro4.ajedrez.modelo;
+import co.edu.utp.isc.pro4.ajedrez.modelo.Alfil;
+import co.edu.utp.isc.pro4.ajedrez.modelo.Caballo;
+import co.edu.utp.isc.pro4.ajedrez.modelo.Casilla;
+import co.edu.utp.isc.pro4.ajedrez.modelo.Color;
+import co.edu.utp.isc.pro4.ajedrez.modelo.Cronometro;
+import co.edu.utp.isc.pro4.ajedrez.modelo.Ficha;
+import co.edu.utp.isc.pro4.ajedrez.modelo.Jugador;
+import co.edu.utp.isc.pro4.ajedrez.modelo.Peon;
+import co.edu.utp.isc.pro4.ajedrez.modelo.Reina;
+import co.edu.utp.isc.pro4.ajedrez.modelo.Rey;
+import co.edu.utp.isc.pro4.ajedrez.modelo.Tablero;
+import co.edu.utp.isc.pro4.ajedrez.modelo.Torre;
 import java.util.Scanner;
 
 /**

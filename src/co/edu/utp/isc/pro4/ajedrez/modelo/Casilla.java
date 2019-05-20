@@ -5,11 +5,15 @@
  */
 package co.edu.utp.isc.pro4.ajedrez.modelo;
 
+import co.edu.utp.isc.pro4.ajedrez.controlador.Dibujable;
+import java.awt.Graphics2D;
+import java.awt.geom.Rectangle2D;
+
 /**
  *
  * @author utp
  */
-public class Casilla {
+public class Casilla extends Dibujable{
     private final Color color;
     private final int fila;
     private final char columna;
@@ -50,5 +54,14 @@ public class Casilla {
     @Override
     public String toString() {
         return isOcupada() ? this.ficha.toString() : "  "; //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void draw(Graphics2D g, float x, float y) {
+        g.setColor(color == Color.BLANCO ? java.awt.Color.WHITE : java.awt.Color.DARK_GRAY);
+        g.fill(new Rectangle2D.Float(x + 0, y + 0, 50, 50));
+        if(ficha != null){
+            ficha.draw(g, x, y);
+        }    
     }
 }

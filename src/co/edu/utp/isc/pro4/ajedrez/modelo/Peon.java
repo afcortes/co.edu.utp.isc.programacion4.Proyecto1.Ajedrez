@@ -4,7 +4,10 @@
  * and open the template in the editor.
  */
 package co.edu.utp.isc.pro4.ajedrez.modelo;
-
+import java.awt.GradientPaint;
+import java.awt.Graphics2D;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Rectangle2D;
 /**
  *
  * @author utp
@@ -66,6 +69,19 @@ public class Peon extends Ficha {
             }
         }
         return false;
+    }
+
+    @Override
+    public void draw(Graphics2D g, float x, float y) {
+        g.setPaint(new GradientPaint(x, y,
+                getColor() == Color.NEGRO ? java.awt.Color.BLACK : java.awt.Color.CYAN,
+                x + 50, y + 50,
+                java.awt.Color.WHITE));
+        g.fill(new Ellipse2D.Float(x + 15, y + 5, 20, 20));
+        g.fill(new Rectangle2D.Float(x + 15, y + 25, 20, 20));
+        g.setPaint(java.awt.Color.BLACK);
+        g.draw(new Ellipse2D.Float(x + 15, y + 5, 20, 20));
+        g.draw(new Rectangle2D.Float(x + 15, y + 25, 20, 20));    
     }
     
 

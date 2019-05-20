@@ -5,6 +5,11 @@
  */
 package co.edu.utp.isc.pro4.ajedrez.modelo;
 
+import java.awt.GradientPaint;
+import java.awt.Graphics2D;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.GeneralPath;
+
 /**
  *
  * @author utp
@@ -101,6 +106,53 @@ public class Rey extends Ficha {
         Ficha f = c1.getFicha();
         c1.setFicha(null);
         c2.setFicha(f);
+    }
+
+    @Override
+    public void draw(Graphics2D g, float x, float y) {
+        GeneralPath polyline = new GeneralPath(GeneralPath.WIND_EVEN_ODD, 17);
+        polyline.moveTo(x + 10, y + 45);
+        polyline.lineTo(x + 40, y + 45);
+        polyline.lineTo(x + 30, y + 40);
+        polyline.lineTo(x + 30, y + 24);
+        polyline.lineTo(x + 35, y + 15);
+        
+        polyline.lineTo(x + 27, y + 15);
+        polyline.lineTo(x + 27, y + 11);
+        polyline.lineTo(x + 31, y + 11);
+        polyline.lineTo(x + 31, y + 8);
+        polyline.lineTo(x + 27, y + 8);
+        polyline.lineTo(x + 27, y + 5);
+        polyline.lineTo(x + 23, y + 5);
+        polyline.lineTo(x + 23, y + 8);
+        polyline.lineTo(x + 19, y + 8);
+        polyline.lineTo(x + 19, y + 11);
+        polyline.lineTo(x + 23, y + 11);
+        polyline.lineTo(x + 23, y + 15);
+        polyline.lineTo(x + 15, y + 15);
+        polyline.lineTo(x + 20, y + 24);
+        polyline.lineTo(x + 20, y + 40);
+        polyline.lineTo(x + 10, y + 45);
+        
+        g.setPaint(new GradientPaint(x, y,
+                getColor() == Color.BLANCO ? java.awt.Color.CYAN : java.awt.Color.BLACK,
+                x + 100, y + 50,
+                java.awt.Color.WHITE));
+        g.fill(polyline);
+
+        g.setColor(java.awt.Color.BLACK);
+        g.draw(polyline);
+        
+        g.setPaint(new GradientPaint(x, y,
+                getColor() == Color.NEGRO ? java.awt.Color.BLACK : java.awt.Color.CYAN,
+                x + 50, y + 50,
+                java.awt.Color.WHITE));
+        
+        g.fill(new Ellipse2D.Float(x + 15, y + 26, 20, 5));
+        g.fill(new Ellipse2D.Float(x + 20, y + 24, 10, 2));
+        g.setPaint(java.awt.Color.BLACK);
+        g.draw(new Ellipse2D.Float(x + 15, y + 26, 20, 5));
+        g.draw(new Ellipse2D.Float(x + 20, y + 24, 10, 2));
     }
 
 

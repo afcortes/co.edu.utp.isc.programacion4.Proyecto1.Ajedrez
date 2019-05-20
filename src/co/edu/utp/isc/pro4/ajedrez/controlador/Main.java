@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.utp.isc.pro4.ajedrez;
+package co.edu.utp.isc.pro4.ajedrez.controlador;
 
 import co.edu.utp.isc.pro4.ajedrez.modelo.Ajedrez;
 import co.edu.utp.isc.pro4.ajedrez.modelo.Color;
