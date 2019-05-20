@@ -13,8 +13,11 @@ import java.util.Objects;
  */
 public class Torre extends Ficha {
 
+    private boolean primerMovimiento;
+    
     public Torre(Color color) {
         super(color);
+        primerMovimiento = false;
     }
 
     @Override
@@ -27,6 +30,7 @@ public class Torre extends Ficha {
                     return false;
                 }
             }
+            this.setPrimerMovimiento();
             return true;
         }
         else if(Inicial.charAt(0)==(movimiento.charAt(0))){
@@ -39,6 +43,7 @@ public class Torre extends Ficha {
                     return false;
                 }
             }
+            this.setPrimerMovimiento();
             return true;
         }
         return false;
@@ -46,9 +51,7 @@ public class Torre extends Ficha {
 
     @Override
     public boolean comer(String Inicial,String movimiento) {
-        System.out.println("Comer");
         return this.mover(Inicial, movimiento);
     }
 
-    
 }

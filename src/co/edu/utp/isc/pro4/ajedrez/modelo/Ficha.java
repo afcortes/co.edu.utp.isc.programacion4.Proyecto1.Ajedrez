@@ -14,9 +14,11 @@ public abstract class Ficha {
     private Casilla casilla;
     private final Color color;
     private Ajedrez ajedrez;
+    private boolean primerMovimiento;
 
     public Ficha(Color color) {
         this.color = color;
+        this.primerMovimiento = false;
     }
 
     public abstract boolean mover(String Inicial,String movimiento);
@@ -36,11 +38,19 @@ public abstract class Ficha {
     }
 
     public Color getColor() {
-        return color;
+        return this.color;
     }
     
     public Ajedrez getAjedrez(){
-        return ajedrez;
+        return this.ajedrez;
+    }
+    
+    public boolean isPrimerMovimiento(){
+        return this.primerMovimiento;
+    }
+    
+    public void setPrimerMovimiento(){
+        this.primerMovimiento = true;
     }
 
     @Override
