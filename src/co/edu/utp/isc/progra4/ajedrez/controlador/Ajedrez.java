@@ -1,30 +1,42 @@
+package co.edu.utp.isc.progra4.ajedrez.controlador;
+
+import co.edu.utp.isc.progra4.ajedrez.modelo.Alfil;
+import co.edu.utp.isc.progra4.ajedrez.modelo.Caballo;
+import co.edu.utp.isc.progra4.ajedrez.modelo.Casilla;
+import co.edu.utp.isc.progra4.ajedrez.modelo.Color;
+import co.edu.utp.isc.progra4.ajedrez.modelo.Cronometro;
+import co.edu.utp.isc.progra4.ajedrez.modelo.Ficha;
+import co.edu.utp.isc.progra4.ajedrez.modelo.Jugador;
+import co.edu.utp.isc.progra4.ajedrez.modelo.Peon;
+import co.edu.utp.isc.progra4.ajedrez.modelo.Reina;
+import co.edu.utp.isc.progra4.ajedrez.modelo.Rey;
+import co.edu.utp.isc.progra4.ajedrez.modelo.Tablero;
+import co.edu.utp.isc.progra4.ajedrez.modelo.Torre;
+import co.edu.utp.isc.pro4gra.ajedrez.ui.PnlTablero;
+import co.edu.utp.isc.pro4gra.ajedrez.ui.FrmAjedrez;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.utp.isc.pro4.ajedrez.modelo;
-import java.util.Scanner;
 
-/**
- *
- * @author utp: odau
- */
 public class Ajedrez {
 
+    private FrmAjedrez frmAjedrez;
+    private PnlTablero pnlTablero;
     private Jugador[] jugadores;
     private Tablero tablero;
     private Cronometro cronometro;
 
     private int turno;
-    private boolean terminado;
 
     public Ajedrez() {
         jugadores = new Jugador[2];
         tablero = new Tablero();
         cronometro = new Cronometro();
         turno = 0;
-        terminado = false;
+
     }
 
     public Ajedrez(Jugador jugador1, Jugador jugador2) {
@@ -33,47 +45,28 @@ public class Ajedrez {
         this.jugadores[1] = jugador2;
     }
 
-    @SuppressWarnings("empty-statement")
-    public void jugar() {
-        jugadores[0].setAjedrez(this);
-        jugadores[1].setAjedrez(this);
-        jugadores[0].setRey();
-        jugadores[1].setRey();
 
-        ubicarFichasTablero();
-        mostrarTablero();
-
-        cronometro.iniciar();
-        do {
+    public void jugar(String[] jugada) {
             System.out.println(jugadores[turno].getColor() == Color.BLANCO ? "Turno blanco" : "Turno negro");
-            while(!jugadores[turno].jugar(this.mover()));
-            // Validar si hay Jaque Mate y terminar
-            if (terminado) {
-                turno = (turno == 0 ? 1 : 0);
-                break;
-            } else if (validarJaque()) {
-                if(validarJaqueMate()){
-                    terminado = true;
-                break;
+            if(jugadores[turno].jugar(jugada)){
+                // Validar si hay Jaque Mate y terminar
+                this.frmAjedrez.setTextMovimientos(jugada);
+                if (this.frmAjedrez.isTerminado()) {
+                    turno = (turno == 0 ? 1 : 0);
+                } else if (validarJaque()) {
+                    if(validarJaqueMate()){
+                        this.frmAjedrez.setTerminado();
+                        this.terminarJuego();
+                    }
+                    System.out.println("Jaque");
+                } else if (validarTablas()) {
+                    this.terminarJuego();
                 }
-                System.out.println("Jaque");
-            } else if (validarTablas()) {
-                break;
+                this.mostrarTablero();
+                // Sino, cambiar turno
+                cambioTurno();
+                this.frmAjedrez.setTextLblJugador(this.jugadores[turno].getNombre());
             }
-            mostrarTablero();
-            // Sino, cambiar turno
-            cambioTurno();
-
-        } while (!terminado);
-        cronometro.parar();
-
-        //TODO: Cambiarlo de lugar
-        if (terminado) {
-            System.out.println("El Jugador "
-                    + jugadores[turno].getNombre() + " ha ganado");
-        } else {
-            System.out.println("Los jugadores han quedado en tablas");
-        }
     }
 
     public void cambioTurno() {
@@ -81,6 +74,15 @@ public class Ajedrez {
         cronometro.cambio();
     }
 
+    public void setPnlTablero(PnlTablero pnlTablero) {
+        this.pnlTablero = pnlTablero;
+        pnlTablero.setTablero(tablero);
+    }
+    
+    public void setFrmAjedrez(FrmAjedrez frmAjedrez){
+        this.frmAjedrez = frmAjedrez;
+    }
+    
     private boolean validarJaqueMate() {
         int jaqueMate = this.turno == 1 ? 0 : 1;
         return this.tablero.validarJaqueMate(this.jugadores[jaqueMate].getColor(),this.jugadores[jaqueMate].getRey());
@@ -92,7 +94,7 @@ public class Ajedrez {
     }
 
     public void rendirse() {
-        terminado = true;
+        this.frmAjedrez.setTerminado();
     }
 
     private void ubicarFichasTablero() {
@@ -134,6 +136,7 @@ public class Ajedrez {
     
 
     private void mostrarTablero() {
+        pnlTablero.updateUI();
         System.out.println("  \tA \tB \tC \tD \tE \tF \tG \tH");
         for (int i = 0; i < 8; i++) {
             System.out.print((i + 1));
@@ -143,19 +146,35 @@ public class Ajedrez {
             System.out.println();
         }
     }
-    
-    public String[] mover(){
-        //TODO:
-        String[] arreglo = new String[2];
-        Scanner scanIn = new Scanner(System.in);
-        arreglo[0] = scanIn.nextLine();
-        arreglo[1] = scanIn.nextLine();
-        return arreglo;
-    }
 
     private boolean validarJaque() {
         int jaque = this.turno == 1 ? 0 : 1;
         return this.tablero.validarJaque(this.jugadores[jaque].getColor(),this.jugadores[jaque].getRey());
+    }
+
+    public void IniciarJuego() {
+        jugadores[0].setAjedrez(this);
+        jugadores[1].setAjedrez(this);
+        jugadores[0].setRey();
+        jugadores[1].setRey();
+
+        this.ubicarFichasTablero();
+        this.mostrarTablero();
+        this.frmAjedrez.setTextLblJugador(this.jugadores[turno].getNombre());
+
+        cronometro.iniciar();    
+    }
+    
+    public void terminarJuego(){
+        cronometro.parar();
+
+        //TODO: Cambiarlo de lugar
+        if (this.frmAjedrez.isTerminado()) {
+            System.out.println("El Jugador "
+                    + jugadores[turno].getNombre() + " ha ganado");
+        } else {
+            System.out.println("Los jugadores han quedado en tablas");
+        }
     }
 
 }

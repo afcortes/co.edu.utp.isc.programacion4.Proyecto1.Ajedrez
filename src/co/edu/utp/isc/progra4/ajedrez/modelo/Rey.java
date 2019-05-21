@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.utp.isc.pro4.ajedrez.modelo;
+package co.edu.utp.isc.progra4.ajedrez.modelo;
 
 import java.awt.GradientPaint;
 import java.awt.Graphics2D;
@@ -79,13 +79,15 @@ public class Rey extends Ficha {
                             return false;
                         }
                     }
-                    if(!this.getAjedrez().getTablero().getCasilla("B8").isOcupada())
+                    if(!this.getAjedrez().getTablero().getCasilla("B8").isOcupada()){
                         if(this.getAjedrez().getTablero().getCasilla("A8").getFicha() instanceof Torre ){
                             if(!this.isPrimerMovimiento()&&!this.getAjedrez().getTablero().getCasilla("A8").getFicha().isPrimerMovimiento()){
                                 this.enroque("A8","D8");
                                 return true;
                             }
                         } 
+                    }
+                        
 
                 }
             }
@@ -110,6 +112,7 @@ public class Rey extends Ficha {
         Ficha f = c1.getFicha();
         c1.setFicha(null);
         c2.setFicha(f);
+        this.setPrimerMovimiento();
     }
 
     @Override

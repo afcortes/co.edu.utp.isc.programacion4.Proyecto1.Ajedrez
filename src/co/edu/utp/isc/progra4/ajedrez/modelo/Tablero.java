@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.utp.isc.pro4.ajedrez.modelo;
+package co.edu.utp.isc.progra4.ajedrez.modelo;
 
 /**
  *
@@ -389,7 +389,7 @@ public class Tablero {
         return false;
     }
 
-    boolean validarJaqueMate(Color color, Casilla rey) {     
+    public boolean validarJaqueMate(Color color, Casilla rey) {     
         if(rey.getFila()>1){
             if(!this.getCasilla(rey.getFila()-1,rey.getColumna()).isOcupada()){
                 if(!this.isAmenazada(color, this.getCasilla(rey.getFila()-1,rey.getColumna()))){
