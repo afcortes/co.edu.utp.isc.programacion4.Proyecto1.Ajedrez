@@ -62,7 +62,7 @@ public class Rey extends Ficha {
             else if(this.getColor()==Color.NEGRO){
                 if(movimiento.equalsIgnoreCase("G8")){
                     for(int i = this.getCasilla().getColumna()+1;i<='G';i++){
-                        if((this.getAjedrez().getTablero().getCasilla(1,((char)(i))).isOcupada())||(this.getAjedrez().getTablero().isAmenazada(this.getColor(), this.getAjedrez().getTablero().getCasilla(1,((char)(i)))))){
+                        if((this.getAjedrez().getTablero().getCasilla(1,((char)(i))).isOcupada())||(this.getAjedrez().getTablero().isAmenazada(this.getColor(), this.getAjedrez().getTablero().getCasilla(8,((char)(i)))))){
                             return false;
                         }
                     }
@@ -75,7 +75,7 @@ public class Rey extends Ficha {
                 }
                 else if(movimiento.equalsIgnoreCase("C8")){
                     for(int i = this.getCasilla().getColumna()-1;i>='C';i--){
-                        if((this.getAjedrez().getTablero().getCasilla(1,((char)(i))).isOcupada())||(this.getAjedrez().getTablero().isAmenazada(this.getColor(), this.getAjedrez().getTablero().getCasilla(1,((char)(i)))))){
+                        if((this.getAjedrez().getTablero().getCasilla(8,((char)(i))).isOcupada())||(this.getAjedrez().getTablero().isAmenazada(this.getColor(), this.getAjedrez().getTablero().getCasilla(8,((char)(i)))))){
                             return false;
                         }
                     }
