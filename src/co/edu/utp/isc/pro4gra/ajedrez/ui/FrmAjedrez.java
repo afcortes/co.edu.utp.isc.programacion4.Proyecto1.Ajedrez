@@ -312,6 +312,8 @@ public class FrmAjedrez extends javax.swing.JFrame {
                 jugada[1] = txtFin.getText();
                 juego.jugar(jugada);
                 jugadaInicial = true;
+                this.txtInicio.setText("");
+                this.txtFin.setText("");
             }
         }
     }//GEN-LAST:event_pnlTableroMouseReleased

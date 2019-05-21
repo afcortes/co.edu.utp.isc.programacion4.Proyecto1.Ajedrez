@@ -422,11 +422,49 @@ public class Tablero {
                     return false;
                 }
             }
+            else if((this.getCasilla(rey.getFila()+1,rey.getColumna()).isOcupada())&&(this.getCasilla(rey.getFila()+1,rey.getColumna()).getFicha().getColor()!=color)){
+                if(!this.isAmenazada(color, this.getCasilla(rey.getFila()+1,rey.getColumna()))){
+                    Casilla c1 = rey;
+                    Casilla c2 = this.getCasilla(rey.getFila()+1,rey.getColumna());
+                    Ficha f1 = c1.getFicha();
+                    Ficha f2 = c2.getFicha();
+                    c1.setFicha(null);
+                    c2.setFicha(f1);
+                    if(isAmenazada(color, c2)){
+                        c1.setFicha(f1);
+                        c2.setFicha(f2);
+                    }
+                    else{
+                        c1.setFicha(f1);
+                        c2.setFicha(f2);
+                        return false;
+                    }
+                }
+            }
         }
         if(rey.getColumna()>'A'){
             if(!this.getCasilla(rey.getFila(),((char)(rey.getColumna()-1))).isOcupada()){
                 if(!this.isAmenazada(color, this.getCasilla(rey.getFila(),((char)(rey.getColumna()-1))))){
                     return false;
+                }
+            }
+            else if((this.getCasilla(rey.getFila(),((char)(rey.getColumna()-1))).isOcupada())&&(this.getCasilla(rey.getFila(),((char)(rey.getColumna()-1))).getFicha().getColor()!=color)){
+                if(!this.isAmenazada(color, this.getCasilla(rey.getFila(),((char)(rey.getColumna()-1))))){
+                    Casilla c1 = rey;
+                    Casilla c2 = this.getCasilla(rey.getFila(),((char)(rey.getColumna()-1)));
+                    Ficha f1 = c1.getFicha();
+                    Ficha f2 = c2.getFicha();
+                    c1.setFicha(null);
+                    c2.setFicha(f1);
+                    if(isAmenazada(color, c2)){
+                        c1.setFicha(f1);
+                        c2.setFicha(f2);
+                    }
+                    else{
+                        c1.setFicha(f1);
+                        c2.setFicha(f2);
+                        return false;
+                    }
                 }
             }
         }
@@ -436,11 +474,49 @@ public class Tablero {
                     return false;
                 }
             }
+            else if((this.getCasilla(rey.getFila(),((char)(rey.getColumna()+1))).isOcupada())&&(this.getCasilla(rey.getFila(),((char)(rey.getColumna()+1))).getFicha().getColor()!=color)){
+                if(!this.isAmenazada(color, this.getCasilla(rey.getFila(),((char)(rey.getColumna()+1))))){
+                    Casilla c1 = rey;
+                    Casilla c2 = this.getCasilla(rey.getFila(),((char)(rey.getColumna()+1)));
+                    Ficha f1 = c1.getFicha();
+                    Ficha f2 = c2.getFicha();
+                    c1.setFicha(null);
+                    c2.setFicha(f1);
+                    if(isAmenazada(color, c2)){
+                        c1.setFicha(f1);
+                        c2.setFicha(f2);
+                    }
+                    else{
+                        c1.setFicha(f1);
+                        c2.setFicha(f2);
+                        return false;
+                    }
+                }
+            }
         }
         if(rey.getFila()>1&&rey.getColumna()>'A'){
             if(!this.getCasilla(rey.getFila()-1,((char)(rey.getColumna()-1))).isOcupada()){
                 if(!this.isAmenazada(color, this.getCasilla(rey.getFila()-1,((char)(rey.getColumna()-1))))){
                     return false;
+                }
+            }
+            else if((this.getCasilla(rey.getFila()-1,((char)(rey.getColumna()-1))).isOcupada())&&(this.getCasilla(rey.getFila()-1,((char)(rey.getColumna()-1))).getFicha().getColor()!=color)){
+                if(!this.isAmenazada(color, this.getCasilla(rey.getFila()-1,((char)(rey.getColumna()-1))))){
+                    Casilla c1 = rey;
+                    Casilla c2 = this.getCasilla(rey.getFila()-1,((char)(rey.getColumna()-1)));
+                    Ficha f1 = c1.getFicha();
+                    Ficha f2 = c2.getFicha();
+                    c1.setFicha(null);
+                    c2.setFicha(f1);
+                    if(isAmenazada(color, c2)){
+                        c1.setFicha(f1);
+                        c2.setFicha(f2);
+                    }
+                    else{
+                        c1.setFicha(f1);
+                        c2.setFicha(f2);
+                        return false;
+                    }
                 }
             }
         }
@@ -450,11 +526,49 @@ public class Tablero {
                     return false;
                 }
             }
+            else if((this.getCasilla(rey.getFila()-1,((char)(rey.getColumna()+1))).isOcupada())&&(this.getCasilla(rey.getFila()-1,((char)(rey.getColumna()+1))).getFicha().getColor()!= color)){
+                if(!this.isAmenazada(color, this.getCasilla(rey.getFila()-1,((char)(rey.getColumna()+1))))){
+                    Casilla c1 = rey;
+                    Casilla c2 = this.getCasilla(rey.getFila()-1,((char)(rey.getColumna()+1)));
+                    Ficha f1 = c1.getFicha();
+                    Ficha f2 = c2.getFicha();
+                    c1.setFicha(null);
+                    c2.setFicha(f1);
+                    if(isAmenazada(color, c2)){
+                        c1.setFicha(f1);
+                        c2.setFicha(f2);
+                    }
+                    else{
+                        c1.setFicha(f1);
+                        c2.setFicha(f2);
+                        return false;
+                    }
+                }
+            }
         }
         if(rey.getFila()<8&&rey.getColumna()>'A'){
             if(!this.getCasilla(rey.getFila()+1,((char)(rey.getColumna()-1))).isOcupada()){
                 if(!this.isAmenazada(color, this.getCasilla(rey.getFila()+1,((char)(rey.getColumna()-1))))){
                     return false;
+                }
+            }
+            else if((this.getCasilla(rey.getFila()+1,((char)(rey.getColumna()-1))).isOcupada())&&(this.getCasilla(rey.getFila()+1,((char)(rey.getColumna()-1))).getFicha().getColor()!=color)){
+                if(!this.isAmenazada(color, this.getCasilla(rey.getFila()+1,((char)(rey.getColumna()-1))))){
+                    Casilla c1 = rey;
+                    Casilla c2 = this.getCasilla(rey.getFila()+1,((char)(rey.getColumna()-1)));
+                    Ficha f1 = c1.getFicha();
+                    Ficha f2 = c2.getFicha();
+                    c1.setFicha(null);
+                    c2.setFicha(f1);
+                    if(isAmenazada(color, c2)){
+                        c1.setFicha(f1);
+                        c2.setFicha(f2);
+                    }
+                    else{
+                        c1.setFicha(f1);
+                        c2.setFicha(f2);
+                        return false;
+                    }
                 }
             }
         }
@@ -464,9 +578,29 @@ public class Tablero {
                     return false;
                 }
             }
+            else if((this.getCasilla(rey.getFila()+1,((char)(rey.getColumna()+1))).isOcupada())&&(this.getCasilla(rey.getFila()+1,((char)(rey.getColumna()+1))).getFicha().getColor()!=color)){
+                if(!this.isAmenazada(color, this.getCasilla(rey.getFila()+1,((char)(rey.getColumna()+1))))){
+                    Casilla c1 = rey;
+                    Casilla c2 = this.getCasilla(rey.getFila()+1,((char)(rey.getColumna()+1)));
+                    Ficha f1 = c1.getFicha();
+                    Ficha f2 = c2.getFicha();
+                    c1.setFicha(null);
+                    c2.setFicha(f1);
+                    if(isAmenazada(color, c2)){
+                        c1.setFicha(f1);
+                        c2.setFicha(f2);
+                    }
+                    else{
+                        c1.setFicha(f1);
+                        c2.setFicha(f2);
+                        return false;
+                    }
+                }
+            }
         }
         
-        return isProtegible(color,rey);
+        System.out.println("JaqueMate");
+        return !isProtegible(color,rey);
     }
 
     private boolean isProtegible(Color color, Casilla rey) {
