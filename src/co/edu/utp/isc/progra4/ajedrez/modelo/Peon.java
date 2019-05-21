@@ -7,6 +7,7 @@ package co.edu.utp.isc.progra4.ajedrez.modelo;
 import java.awt.GradientPaint;
 import java.awt.Graphics2D;
 import java.awt.geom.Ellipse2D;
+import java.awt.geom.GeneralPath;
 import java.awt.geom.Rectangle2D;
 /**
  *
@@ -73,15 +74,37 @@ public class Peon extends Ficha {
 
     @Override
     public void draw(Graphics2D g, float x, float y) {
+        GeneralPath polyline = new GeneralPath(GeneralPath.WIND_EVEN_ODD, 17);
+        polyline.moveTo(x + 15, y + 45);
+        polyline.lineTo(x + 35, y + 45);
+        polyline.lineTo(x + 30, y + 40);
+        polyline.lineTo(x + 30, y + 31);      
+        polyline.lineTo(x + 20, y + 31);
+        polyline.lineTo(x + 20, y + 40);
+        polyline.lineTo(x + 15, y + 45);
+        
+        
+        g.setPaint(new GradientPaint(x, y,
+                getColor() == Color.BLANCO ? java.awt.Color.CYAN : java.awt.Color.BLACK,
+                x + 100, y + 50,
+                java.awt.Color.WHITE));
+        g.fill(polyline);
+
+        g.setColor(java.awt.Color.BLACK);
+        g.draw(polyline);
+
+        
         g.setPaint(new GradientPaint(x, y,
                 getColor() == Color.NEGRO ? java.awt.Color.BLACK : java.awt.Color.CYAN,
                 x + 50, y + 50,
                 java.awt.Color.WHITE));
-        g.fill(new Ellipse2D.Float(x + 15, y + 5, 20, 20));
-        g.fill(new Rectangle2D.Float(x + 15, y + 25, 20, 20));
+        
+        g.fill(new Ellipse2D.Float(x + 17, y + 10, 16, 16));
+        g.fill(new Ellipse2D.Float(x + 17, y + 26, 16, 5));
         g.setPaint(java.awt.Color.BLACK);
-        g.draw(new Ellipse2D.Float(x + 15, y + 5, 20, 20));
-        g.draw(new Rectangle2D.Float(x + 15, y + 25, 20, 20));    
+        g.draw(new Ellipse2D.Float(x + 17, y + 10, 16, 16));
+        g.draw(new Ellipse2D.Float(x + 17, y + 26, 16, 5));
+
     }
     
 

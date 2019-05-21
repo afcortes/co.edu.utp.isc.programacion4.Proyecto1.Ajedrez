@@ -41,9 +41,22 @@ public class Caballo extends Ficha {
         polyline.moveTo(x + 10, y + 45);
         polyline.lineTo(x + 40, y + 45);
         polyline.lineTo(x + 40, y + 38);
+        polyline.lineTo(x + 30, y + 30);
+        polyline.lineTo(x + 37, y + 30);
+        //Cabeza
+        polyline.lineTo(x + 24, y + 20);
+        polyline.lineTo(x + 37, y + 20);
+        polyline.lineTo(x + 37, y + 15);
+        polyline.lineTo(x + 27, y + 5);
+        //orejas
+        polyline.lineTo(x + 22, y + 5);
+        polyline.lineTo(x + 22, y);
         
+        //crin
+        polyline.lineTo(x + 12, y + 15);
+        polyline.lineTo(x + 12, y + 30);
         
-        
+        polyline.lineTo(x + 20, y + 30);
         polyline.lineTo(x + 10, y + 38);
         polyline.lineTo(x + 10, y + 45);
         
@@ -61,9 +74,9 @@ public class Caballo extends Ficha {
                 x + 50, y + 50,
                 java.awt.Color.WHITE));        
         
-        g.fill(new Ellipse2D.Float(x + 15, y + 20, 20, 8));
+        g.fill(new Ellipse2D.Float(x + 10, y + 33, 30, 5));
         g.setPaint(java.awt.Color.BLACK);
-        g.draw(new Ellipse2D.Float(x + 15, y + 20, 20, 8));
+        g.draw(new Ellipse2D.Float(x + 10, y + 33, 30, 5));
     }
 
 }
