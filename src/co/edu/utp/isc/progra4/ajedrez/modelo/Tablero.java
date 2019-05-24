@@ -417,15 +417,23 @@ public class Tablero {
             }
         }
         if(rey.getFila()<8){
-            if(!this.getCasilla(rey.getFila()+1,rey.getColumna()).isOcupada()){
-                if(!this.isAmenazada(color, this.getCasilla(rey.getFila()+1,rey.getColumna()))){
-                    return false;
+            Casilla c2 = this.getCasilla(rey.getFila()+1,rey.getColumna());
+            if(!c2.isOcupada()){
+                Casilla c1 = rey;
+                Ficha f1 = c1.getFicha();
+                c1.setFicha(null);
+                if(!this.isAmenazada(color, c2)){
+                    c1.setFicha(f1);
+                    
                 }
+                else{
+                        c1.setFicha(f1);
+                        return false;
+                    }
             }
             else if((this.getCasilla(rey.getFila()+1,rey.getColumna()).isOcupada())&&(this.getCasilla(rey.getFila()+1,rey.getColumna()).getFicha().getColor()!=color)){
                 if(!this.isAmenazada(color, this.getCasilla(rey.getFila()+1,rey.getColumna()))){
                     Casilla c1 = rey;
-                    Casilla c2 = this.getCasilla(rey.getFila()+1,rey.getColumna());
                     Ficha f1 = c1.getFicha();
                     Ficha f2 = c2.getFicha();
                     c1.setFicha(null);

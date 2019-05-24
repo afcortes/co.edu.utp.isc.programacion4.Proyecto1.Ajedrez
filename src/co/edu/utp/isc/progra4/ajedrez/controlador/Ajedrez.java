@@ -59,8 +59,10 @@ public class Ajedrez {
                         this.terminarJuego();
                         System.out.println("JaqueMate");
                     }
-                    System.out.println("Jaque");
-                } else if (validarTablas()) {
+                    else{
+                        System.out.println("Jaque");
+                    }
+                }else if (validarTablas()) {
                     System.out.println("Tablas");
                     this.terminarJuego();
                 }
@@ -91,10 +93,10 @@ public class Ajedrez {
     }
 
     private boolean validarTablas() {
-        Ficha[] fichasBlancas = new Ficha[15];
+        Ficha[] fichasBlancas = new Ficha[16];
         int fBlancas = 0;
-        Ficha[] fichasNegras = new Ficha[15];
-        int fNegras = 0;
+        Ficha[] fichasNegras = new Ficha[16];
+        int fNegras = 0; 
         for(int i = 1; i<=8;i++){
             for(int j = 'A';j<='H';j++){
                 if(this.getTablero().getCasilla(i,((char)(j))).isOcupada()){
