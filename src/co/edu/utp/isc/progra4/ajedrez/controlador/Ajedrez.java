@@ -57,6 +57,7 @@ public class Ajedrez {
                     if(validarJaqueMate()){
                         this.frmAjedrez.setTerminado();
                         this.terminarJuego();
+                        System.out.println("JaqueMate");
                     }
                     System.out.println("Jaque");
                 } else if (validarTablas()) {
@@ -89,8 +90,50 @@ public class Ajedrez {
     }
 
     private boolean validarTablas() {
-        //TODO: Validar si los jugadores se han quedado sin posibilidad de ganar
-        return false;
+        Ficha[] fichasBlancas = new Ficha[15];
+        int fBlancas = 0;
+        Ficha[] fichasNegras = new Ficha[15];
+        int fNegras = 0;
+        for(int i = 1; i<=8;i++){
+            for(int j = 'A';j<='H';j++){
+                if(this.getTablero().getCasilla(i,((char)(j))).isOcupada()){
+                    if(!(this.getTablero().getCasilla(i,((char) (j))).getFicha()instanceof Rey)&&(this.getTablero().getCasilla(i,((char) (j))).getColor()==Color.BLANCO)){
+                        fichasBlancas[fBlancas] = this.getTablero().getCasilla(i,((char) (j))).getFicha();
+                        fBlancas++;
+                    }
+                    else if(!(this.getTablero().getCasilla(i,((char) (j))).getFicha()instanceof Rey)&&(this.getTablero().getCasilla(i,((char) (j))).getColor()==Color.NEGRO)){
+                        fichasNegras[fNegras] = this.getTablero().getCasilla(i,((char) (j))).getFicha();
+                        fNegras++;
+                    }
+                }
+            }
+        }
+        boolean tablas = true;
+        if(!(fichasBlancas[0]==null)&&!(fichasNegras[0]==null)){
+            tablas = false;
+        }
+        else{
+            if(!(fichasBlancas[1]==null)||!(fichasBlancas[0] instanceof Caballo||fichasBlancas[0] instanceof Alfil)){
+                tablas = false;
+            }
+            if(!(fichasNegras[1]==null)||!(fichasNegras[0] instanceof Caballo||fichasNegras[0] instanceof Alfil)){
+                tablas = false;
+            }
+            else{
+                if(fichasBlancas[2]==null){
+                    if(!(fichasBlancas[0] instanceof Caballo) || !(fichasBlancas[1] instanceof Caballo)){
+                        tablas = false;
+                    }
+                }
+                if(fichasNegras[2]==null){
+                    if(!(fichasNegras[0] instanceof Caballo) || !(fichasNegras[1] instanceof Caballo)){
+                        tablas = false;
+                    }
+                }
+            }
+            
+        }
+        return tablas;
     }
 
     public void rendirse() {

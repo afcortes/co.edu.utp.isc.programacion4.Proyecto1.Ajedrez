@@ -26,7 +26,10 @@ public class Peon extends Ficha {
     public boolean mover(String Inicial,String movimiento) {
         if(this.getColor() == Color.BLANCO){
             if(Inicial.charAt(0)==movimiento.charAt(0)){
-               if(Integer.valueOf(Inicial.substring(1))+1 == Integer.valueOf(movimiento.substring(1))){
+               if(Integer.valueOf(movimiento.substring(1))==8){
+                   this.rescatar(movimiento);
+               }
+               else if(Integer.valueOf(Inicial.substring(1))+1 == Integer.valueOf(movimiento.substring(1))){
                    return true;
                }
                else if((Integer.valueOf(Inicial.substring(1))+2 == Integer.valueOf(movimiento.substring(1)))&&this.primerMovimiento==false){
@@ -39,6 +42,9 @@ public class Peon extends Ficha {
         }
         else if(this.getColor() == Color.NEGRO){
             if(Inicial.charAt(0)==movimiento.charAt(0)){
+                if(Integer.valueOf(movimiento.substring(1))==1){
+                   this.rescatar(movimiento);
+               }
                if(Integer.valueOf(Inicial.substring(1))-1 == Integer.valueOf(movimiento.substring(1))){
                    return true;
                }
@@ -57,19 +63,33 @@ public class Peon extends Ficha {
     public boolean comer(String Inicial,String movimiento) {
         if(this.getColor()==Color.BLANCO){
             if((Integer.valueOf(movimiento.substring(1))==Integer.valueOf(Inicial.substring(1))+1)){
+                if(Integer.valueOf(movimiento.substring(1))==8){
+                   this.rescatar(movimiento);
+               }
                 if((Inicial.charAt(0)+1==movimiento.charAt(0))||(Inicial.charAt(0)-1==movimiento.charAt(0))){
+                    this.primerMovimiento = true;
                     return true;
                 }
             }
         }
         if(this.getColor()==Color.NEGRO){
             if((Integer.valueOf(movimiento.substring(1))==Integer.valueOf(Inicial.substring(1))-1)){
+                if(Integer.valueOf(movimiento.substring(1))==1){
+                   this.rescatar(movimiento);
+               }
                 if((Inicial.charAt(0)+1==movimiento.charAt(0))||(Inicial.charAt(0)-1==movimiento.charAt(0))){
+                    this.primerMovimiento = true;
                     return true;
                 }
             }
         }
         return false;
+    }
+    
+    private void rescatar(String movimiento){
+        Ficha ficha = null;
+        this.getAjedrez().getTablero().getCasilla(movimiento).setFicha(ficha);
+        this.getCasilla().setFicha(null);
     }
 
     @Override

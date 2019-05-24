@@ -294,26 +294,28 @@ public class FrmAjedrez extends javax.swing.JFrame {
 
     private void pnlTableroMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlTableroMouseReleased
         // TODO add your handling code here:
-        if (juego != null) {
-//            System.out.print(evt.getX() + ", " + evt.getY() + " = ");
-            int col = 1 + evt.getX() / 50;
-            int row = 1 + evt.getY() / 50;
-//            System.out.print(col + ", " + row + " = ");
-            System.out.println((char) ('A' + col - 1) + Integer.toString(row));
-            if (jugadaInicial) {
-                txtInicio.setText((char) ('A' + col - 1) + Integer.toString(row));
-                jugadaInicial = false;
-            } 
-            else if(!jugadaInicial)
-            {
-                txtFin.setText((char) ('A' + col - 1) + Integer.toString(row));
-                String[] jugada = new String[2];
-                jugada[0] = txtInicio.getText();
-                jugada[1] = txtFin.getText();
-                juego.jugar(jugada);
-                jugadaInicial = true;
-                this.txtInicio.setText("");
-                this.txtFin.setText("");
+        if(!terminado){
+            if (juego != null) {
+    //            System.out.print(evt.getX() + ", " + evt.getY() + " = ");
+                int col = 1 + evt.getX() / 50;
+                int row = 1 + evt.getY() / 50;
+    //            System.out.print(col + ", " + row + " = ");
+                System.out.println((char) ('A' + col - 1) + Integer.toString(row));
+                if (jugadaInicial) {
+                    txtInicio.setText((char) ('A' + col - 1) + Integer.toString(row));
+                    jugadaInicial = false;
+                } 
+                else if(!jugadaInicial)
+                {
+                    txtFin.setText((char) ('A' + col - 1) + Integer.toString(row));
+                    String[] jugada = new String[2];
+                    jugada[0] = txtInicio.getText();
+                    jugada[1] = txtFin.getText();
+                    juego.jugar(jugada);
+                    jugadaInicial = true;
+                    this.txtInicio.setText("");
+                    this.txtFin.setText("");
+                }
             }
         }
     }//GEN-LAST:event_pnlTableroMouseReleased
