@@ -61,6 +61,7 @@ public class Ajedrez {
                     }
                     System.out.println("Jaque");
                 } else if (validarTablas()) {
+                    System.out.println("Tablas");
                     this.terminarJuego();
                 }
                 this.mostrarTablero();
