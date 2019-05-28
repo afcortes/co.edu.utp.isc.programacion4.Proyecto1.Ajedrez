@@ -389,223 +389,31 @@ public class Tablero {
         return false;
     }
 
-    public boolean validarJaqueMate(Color color, Casilla rey) {     
-        if(rey.getFila()>1){
-            if(!this.getCasilla(rey.getFila()-1,rey.getColumna()).isOcupada()){
-                if(!this.isAmenazada(color, this.getCasilla(rey.getFila()-1,rey.getColumna()))){
-                    return false;
-                }
-            }
-            else if((this.getCasilla(rey.getFila()-1,rey.getColumna()).isOcupada())&&(this.getCasilla(rey.getFila()-1,rey.getColumna()).getFicha().getColor()!=color)){
-                if(!this.isAmenazada(color, this.getCasilla(rey.getFila()-1,rey.getColumna()))){
-                    Casilla c1 = rey;
-                    Casilla c2 = this.getCasilla(rey.getFila()-1,rey.getColumna());
-                    Ficha f1 = c1.getFicha();
-                    Ficha f2 = c2.getFicha();
-                    c1.setFicha(null);
-                    c2.setFicha(f1);
-                    if(isAmenazada(color, c2)){
-                        c1.setFicha(f1);
-                        c2.setFicha(f2);
+    public boolean validarJaqueMate(Color color, Casilla rey) {
+        Ficha f = rey.getFicha();
+        rey.setFicha(null);
+        for (int i = -1; i <= 1; i++) {
+            for (int j = -1; j <= 1; j++) {
+                if((((rey.getFila()+i)<=8)&&((rey.getFila()+i)>=1))&&((((char)(rey.getColumna()+j))<='H')&&(((char)(rey.getColumna()+j))>='A'))){
+                    if(!((i==0)&&(j==0))){
+                        if(!this.isAmenazada(color,getCasilla(rey.getFila()+i,((char)(rey.getColumna()+j))))){
+                            if(this.getCasilla(rey.getFila()+i,((char)(rey.getColumna()+j))).isOcupada()){
+                                if(this.getCasilla(rey.getFila()+i,((char)(rey.getColumna()+j))).getFicha().getColor()!=color){
+                                    rey.setFicha(f);
+                                    return false;
+                                }
+                            }
+                            else{
+                                rey.setFicha(f);
+                                return false;
+                            }
+                        }
                     }
-                    else{
-                        c1.setFicha(f1);
-                        c2.setFicha(f2);
-                        return false;
-                    }
-                }
+                }  
             }
+            
         }
-        if(rey.getFila()<8){
-            Casilla c2 = this.getCasilla(rey.getFila()+1,rey.getColumna());
-            if(!c2.isOcupada()){
-                Casilla c1 = rey;
-                Ficha f1 = c1.getFicha();
-                c1.setFicha(null);
-                if(!this.isAmenazada(color, c2)){
-                    c1.setFicha(f1);
-                    
-                }
-                else{
-                        c1.setFicha(f1);
-                        return false;
-                    }
-            }
-            else if((this.getCasilla(rey.getFila()+1,rey.getColumna()).isOcupada())&&(this.getCasilla(rey.getFila()+1,rey.getColumna()).getFicha().getColor()!=color)){
-                if(!this.isAmenazada(color, this.getCasilla(rey.getFila()+1,rey.getColumna()))){
-                    Casilla c1 = rey;
-                    Ficha f1 = c1.getFicha();
-                    Ficha f2 = c2.getFicha();
-                    c1.setFicha(null);
-                    c2.setFicha(f1);
-                    if(isAmenazada(color, c2)){
-                        c1.setFicha(f1);
-                        c2.setFicha(f2);
-                    }
-                    else{
-                        c1.setFicha(f1);
-                        c2.setFicha(f2);
-                        return false;
-                    }
-                }
-            }
-        }
-        if(rey.getColumna()>'A'){
-            if(!this.getCasilla(rey.getFila(),((char)(rey.getColumna()-1))).isOcupada()){
-                if(!this.isAmenazada(color, this.getCasilla(rey.getFila(),((char)(rey.getColumna()-1))))){
-                    return false;
-                }
-            }
-            else if((this.getCasilla(rey.getFila(),((char)(rey.getColumna()-1))).isOcupada())&&(this.getCasilla(rey.getFila(),((char)(rey.getColumna()-1))).getFicha().getColor()!=color)){
-                if(!this.isAmenazada(color, this.getCasilla(rey.getFila(),((char)(rey.getColumna()-1))))){
-                    Casilla c1 = rey;
-                    Casilla c2 = this.getCasilla(rey.getFila(),((char)(rey.getColumna()-1)));
-                    Ficha f1 = c1.getFicha();
-                    Ficha f2 = c2.getFicha();
-                    c1.setFicha(null);
-                    c2.setFicha(f1);
-                    if(isAmenazada(color, c2)){
-                        c1.setFicha(f1);
-                        c2.setFicha(f2);
-                    }
-                    else{
-                        c1.setFicha(f1);
-                        c2.setFicha(f2);
-                        return false;
-                    }
-                }
-            }
-        }
-        if(rey.getColumna()<'H'){
-            if(!this.getCasilla(rey.getFila(),((char)(rey.getColumna()+1))).isOcupada()){
-                if(!this.isAmenazada(color, this.getCasilla(rey.getFila(),((char)(rey.getColumna()+1))))){
-                    return false;
-                }
-            }
-            else if((this.getCasilla(rey.getFila(),((char)(rey.getColumna()+1))).isOcupada())&&(this.getCasilla(rey.getFila(),((char)(rey.getColumna()+1))).getFicha().getColor()!=color)){
-                if(!this.isAmenazada(color, this.getCasilla(rey.getFila(),((char)(rey.getColumna()+1))))){
-                    Casilla c1 = rey;
-                    Casilla c2 = this.getCasilla(rey.getFila(),((char)(rey.getColumna()+1)));
-                    Ficha f1 = c1.getFicha();
-                    Ficha f2 = c2.getFicha();
-                    c1.setFicha(null);
-                    c2.setFicha(f1);
-                    if(isAmenazada(color, c2)){
-                        c1.setFicha(f1);
-                        c2.setFicha(f2);
-                    }
-                    else{
-                        c1.setFicha(f1);
-                        c2.setFicha(f2);
-                        return false;
-                    }
-                }
-            }
-        }
-        if(rey.getFila()>1&&rey.getColumna()>'A'){
-            if(!this.getCasilla(rey.getFila()-1,((char)(rey.getColumna()-1))).isOcupada()){
-                if(!this.isAmenazada(color, this.getCasilla(rey.getFila()-1,((char)(rey.getColumna()-1))))){
-                    return false;
-                }
-            }
-            else if((this.getCasilla(rey.getFila()-1,((char)(rey.getColumna()-1))).isOcupada())&&(this.getCasilla(rey.getFila()-1,((char)(rey.getColumna()-1))).getFicha().getColor()!=color)){
-                if(!this.isAmenazada(color, this.getCasilla(rey.getFila()-1,((char)(rey.getColumna()-1))))){
-                    Casilla c1 = rey;
-                    Casilla c2 = this.getCasilla(rey.getFila()-1,((char)(rey.getColumna()-1)));
-                    Ficha f1 = c1.getFicha();
-                    Ficha f2 = c2.getFicha();
-                    c1.setFicha(null);
-                    c2.setFicha(f1);
-                    if(isAmenazada(color, c2)){
-                        c1.setFicha(f1);
-                        c2.setFicha(f2);
-                    }
-                    else{
-                        c1.setFicha(f1);
-                        c2.setFicha(f2);
-                        return false;
-                    }
-                }
-            }
-        }
-        if(rey.getFila()>1&&rey.getColumna()<'H'){
-            if(!this.getCasilla(rey.getFila()-1,((char)(rey.getColumna()+1))).isOcupada()){
-                if(!this.isAmenazada(color, this.getCasilla(rey.getFila()-1,((char)(rey.getColumna()+1))))){
-                    return false;
-                }
-            }
-            else if((this.getCasilla(rey.getFila()-1,((char)(rey.getColumna()+1))).isOcupada())&&(this.getCasilla(rey.getFila()-1,((char)(rey.getColumna()+1))).getFicha().getColor()!= color)){
-                if(!this.isAmenazada(color, this.getCasilla(rey.getFila()-1,((char)(rey.getColumna()+1))))){
-                    Casilla c1 = rey;
-                    Casilla c2 = this.getCasilla(rey.getFila()-1,((char)(rey.getColumna()+1)));
-                    Ficha f1 = c1.getFicha();
-                    Ficha f2 = c2.getFicha();
-                    c1.setFicha(null);
-                    c2.setFicha(f1);
-                    if(isAmenazada(color, c2)){
-                        c1.setFicha(f1);
-                        c2.setFicha(f2);
-                    }
-                    else{
-                        c1.setFicha(f1);
-                        c2.setFicha(f2);
-                        return false;
-                    }
-                }
-            }
-        }
-        if(rey.getFila()<8&&rey.getColumna()>'A'){
-            if(!this.getCasilla(rey.getFila()+1,((char)(rey.getColumna()-1))).isOcupada()){
-                if(!this.isAmenazada(color, this.getCasilla(rey.getFila()+1,((char)(rey.getColumna()-1))))){
-                    return false;
-                }
-            }
-            else if((this.getCasilla(rey.getFila()+1,((char)(rey.getColumna()-1))).isOcupada())&&(this.getCasilla(rey.getFila()+1,((char)(rey.getColumna()-1))).getFicha().getColor()!=color)){
-                if(!this.isAmenazada(color, this.getCasilla(rey.getFila()+1,((char)(rey.getColumna()-1))))){
-                    Casilla c1 = rey;
-                    Casilla c2 = this.getCasilla(rey.getFila()+1,((char)(rey.getColumna()-1)));
-                    Ficha f1 = c1.getFicha();
-                    Ficha f2 = c2.getFicha();
-                    c1.setFicha(null);
-                    c2.setFicha(f1);
-                    if(isAmenazada(color, c2)){
-                        c1.setFicha(f1);
-                        c2.setFicha(f2);
-                    }
-                    else{
-                        c1.setFicha(f1);
-                        c2.setFicha(f2);
-                        return false;
-                    }
-                }
-            }
-        }
-        if(rey.getFila()<8&&rey.getColumna()<'H'){
-            if(!this.getCasilla(rey.getFila()+1,((char)(rey.getColumna()+1))).isOcupada()){
-                if(!this.isAmenazada(color, this.getCasilla(rey.getFila()+1,((char)(rey.getColumna()+1))))){
-                    return false;
-                }
-            }
-            else if((this.getCasilla(rey.getFila()+1,((char)(rey.getColumna()+1))).isOcupada())&&(this.getCasilla(rey.getFila()+1,((char)(rey.getColumna()+1))).getFicha().getColor()!=color)){
-                if(!this.isAmenazada(color, this.getCasilla(rey.getFila()+1,((char)(rey.getColumna()+1))))){
-                    Casilla c1 = rey;
-                    Casilla c2 = this.getCasilla(rey.getFila()+1,((char)(rey.getColumna()+1)));
-                    Ficha f1 = c1.getFicha();
-                    Ficha f2 = c2.getFicha();
-                    c1.setFicha(null);
-                    c2.setFicha(f1);
-                    if(isAmenazada(color, c2)){
-                        c1.setFicha(f1);
-                        c2.setFicha(f2);
-                    }
-                    else{
-                        c1.setFicha(f1);
-                        c2.setFicha(f2);
-                        return false;
-                    }
-                }
-            }
-        }
+        rey.setFicha(f);
         if(!isAlcanzablePorCaballo(color, rey)&&!isAmenazadaPorPeon(color, rey)){
             int cont = 0;
             if(isAlcanzablePorAlfil(color, rey)){
@@ -620,6 +428,7 @@ public class Tablero {
             if(cont>1){
                 return true;
             }
+            System.out.println("Llegue aqui");
             return !isProtegible(color,rey);
         }
         return true;
@@ -652,7 +461,6 @@ public class Tablero {
         while(inicio1>=1&&inicio2<='H'){
             if(this.getCasilla(inicio1, inicio2).isOcupada()){
                 if(((this.getCasilla(inicio1, inicio2).getFicha() instanceof Alfil)||(this.getCasilla(inicio1, inicio2).getFicha() instanceof Reina))&&(this.getCasilla(inicio1, inicio2).getFicha().getColor()!=color)){
-                    System.out.println("!" + this.isAlcanzable(color, this.getCasilla(inicio1,inicio2)));
                     if(protegible == false){
                         return isAmenazadaSinRey(contrario, this.getCasilla(inicio1, inicio2));
                     }
@@ -660,7 +468,6 @@ public class Tablero {
                 }
                 break;
             }
-            System.out.println("!" + this.isAlcanzable(color, this.getCasilla(inicio1,inicio2)));
             if(this.isAlcanzable(color, this.getCasilla(inicio1,inicio2))){
                 protegible = true;
                 System.out.println(protegible);
@@ -709,6 +516,7 @@ public class Tablero {
         protegible = false;
         for (int i = rey.getFila()-1; i >= 1; i--){
             if(getCasilla(i, rey.getColumna()).isOcupada()){
+                System.out.println("estoy aqui");
                 if(((this.getCasilla(i,rey.getColumna()).getFicha() instanceof Torre)||(this.getCasilla(i,rey.getColumna()).getFicha() instanceof Reina))&&(this.getCasilla(i,rey.getColumna()).getFicha().getColor()!=color)){
                     if(protegible == false){
                         return isAmenazadaSinRey(contrario, this.getCasilla(i,rey.getColumna()));
@@ -716,9 +524,11 @@ public class Tablero {
                     return true;
                 }
                 break;
-            }
-            if(this.isAlcanzable(color, this.getCasilla(inicio1,inicio2))){
-                protegible = true;
+            }else{
+                System.out.println(" !! "+this.isAlcanzable(color, this.getCasilla(inicio1,inicio2)));
+                if(this.isAlcanzable(color, this.getCasilla(inicio1,inicio2))){
+                    protegible = true;
+                }
             }
         }
         protegible = false;
@@ -732,6 +542,7 @@ public class Tablero {
                 }
                 break;
             }
+            System.out.println("!!"+this.isAlcanzable(color, this.getCasilla(inicio1,inicio2)));
             if(this.isAlcanzable(color, this.getCasilla(inicio1,inicio2))){
                 protegible = true;
             }
