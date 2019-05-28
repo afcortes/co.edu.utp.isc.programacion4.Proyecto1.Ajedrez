@@ -516,7 +516,6 @@ public class Tablero {
         protegible = false;
         for (int i = rey.getFila()-1; i >= 1; i--){
             if(getCasilla(i, rey.getColumna()).isOcupada()){
-                System.out.println("estoy aqui");
                 if(((this.getCasilla(i,rey.getColumna()).getFicha() instanceof Torre)||(this.getCasilla(i,rey.getColumna()).getFicha() instanceof Reina))&&(this.getCasilla(i,rey.getColumna()).getFicha().getColor()!=color)){
                     if(protegible == false){
                         return isAmenazadaSinRey(contrario, this.getCasilla(i,rey.getColumna()));
@@ -524,12 +523,11 @@ public class Tablero {
                     return true;
                 }
                 break;
-            }else{
-                System.out.println(" !! "+this.isAlcanzable(color, this.getCasilla(inicio1,inicio2)));
-                if(this.isAlcanzable(color, this.getCasilla(inicio1,inicio2))){
-                    protegible = true;
-                }
             }
+            if(this.isAlcanzable(color, this.getCasilla(i,rey.getColumna()))){
+                protegible = true;
+            }
+            
         }
         protegible = false;
         for (int i = rey.getFila()+1; i <= 8; i++){
@@ -542,8 +540,7 @@ public class Tablero {
                 }
                 break;
             }
-            System.out.println("!!"+this.isAlcanzable(color, this.getCasilla(inicio1,inicio2)));
-            if(this.isAlcanzable(color, this.getCasilla(inicio1,inicio2))){
+            if(this.isAlcanzable(color, this.getCasilla(i,rey.getColumna()))){
                 protegible = true;
             }
         }
@@ -558,7 +555,7 @@ public class Tablero {
                 }
                 break;
             }
-            if(this.isAlcanzable(color, this.getCasilla(inicio1,inicio2))){
+            if(this.isAlcanzable(color, this.getCasilla(i,rey.getColumna()))){
                 protegible = true;
             }
         }
@@ -573,7 +570,7 @@ public class Tablero {
                 }
                 break;
             }
-            if(this.isAlcanzable(color, this.getCasilla(inicio1,inicio2))){
+            if(this.isAlcanzable(color, this.getCasilla(i,rey.getColumna()))){
                 protegible = true;
             }
         }
