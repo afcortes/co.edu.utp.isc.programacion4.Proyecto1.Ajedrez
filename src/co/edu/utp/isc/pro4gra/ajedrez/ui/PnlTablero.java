@@ -24,7 +24,7 @@ public class PnlTablero extends JPanel {
         for (int i = 0; i < 8; i++) {
             for (int j = 0; j < 8; j++) {
                 tablero.getCasilla(i, j)
-                        .draw(g2, j * 50, i * 50);
+                        .draw(g2, 350- (j * 50), 350-(i * 50));
             }
         }
     }
