@@ -525,6 +525,7 @@ public class Tablero {
                 break;
             }
             if(this.isAlcanzable(color, this.getCasilla(i,rey.getColumna()))){
+                System.out.println("a");
                 protegible = true;
             }
             
