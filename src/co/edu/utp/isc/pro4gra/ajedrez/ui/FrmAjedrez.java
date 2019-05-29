@@ -297,7 +297,7 @@ public class FrmAjedrez extends javax.swing.JFrame {
         if(!terminado){
             if (juego != null) {
     //            System.out.print(evt.getX() + ", " + evt.getY() + " = ");
-                int col = 8 - (evt.getX() / 50);
+                int col = evt.getX() / 50;
                 int row = 8 - (evt.getY() / 50);
     //            System.out.print(col + ", " + row + " = ");
                 System.out.println((char) ('A' + col - 1) + Integer.toString(row));
@@ -323,7 +323,7 @@ public class FrmAjedrez extends javax.swing.JFrame {
     private void pnlTableroMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pnlTableroMouseMoved
         // TODO add your handling code here:
         if (juego != null) {
-            int col = 8 - (evt.getX() / 50);
+            int col = evt.getX() / 50;
             int row = 8 - (evt.getY() / 50);
             pnlTablero.setToolTipText((char) ('A' + col - 1) + Integer.toString(row));
         }
